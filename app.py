@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="Mistake AI Pro", layout="centered")
 
 st.title("🧠 Mistake Pattern Analyzer AI — PRO LEVEL")
+st.markdown("---")
+st.caption("🚀 Built by You | AI Learning Tracker")
 
 # ---------------- SIDEBAR ----------------
 page = st.sidebar.selectbox(
@@ -20,7 +22,8 @@ wrong = df[df["Status"] == "Wrong"]
 
 # ---------------- CALCULATIONS ----------------
 total = len(df)
-correct = len(df[df["Status"] == "Correct"])
+correct = len(df[df["Status"] == "Correct"]
+)
 score = (correct / total) * 100
 
 # ---------------- LOAD HISTORY ----------------
@@ -99,7 +102,7 @@ elif page == "Progress":
     st.dataframe(history)
 
 # =========================================================
-# ---------------- AI FEEDBACK ----------------
+# ---------------- AI FEEDBACK (LEVEL 4 UPGRADE) ----------------
 # =========================================================
 elif page == "AI Feedback":
     st.subheader("🧠 AI Feedback")
@@ -116,15 +119,40 @@ elif page == "AI Feedback":
         st.markdown("### 🎯 Recommendation")
 
         if top_error == "Concept":
-            st.warning("Focus on theory revision and concept clarity.")
+            st.warning("You lack conceptual clarity. Revise theory first.")
 
         elif top_error == "Careless":
-            st.warning("Slow down and double-check answers.")
+            st.warning("Careless mistakes detected. Slow down and recheck.")
 
         elif top_error == "Silly":
-            st.warning("Improve attention to detail.")
+            st.warning("Silly mistakes. Improve focus.")
 
-        st.success("💡 Tip: Practice consistently for improvement!")
+        # 🔥 NEW: STUDY PLAN
+        st.subheader("📅 Personalized Study Plan")
+
+        plan = f"""
+        Day 1-2: Revise {weak_topic} basics  
+        Day 3-4: Practice problems  
+        Day 5: Take a test  
+        Day 6: Analyze mistakes  
+        Day 7: Revision  
+        """
+
+        st.success(plan)
 
     else:
         st.success("No mistakes found 🎉")
+
+# =========================================================
+# ---------------- DOWNLOAD REPORT (NEW) ----------------
+# =========================================================
+st.markdown("---")
+st.subheader("📥 Download Report")
+
+csv = df.to_csv(index=False).encode('utf-8')
+st.download_button(
+    label="Download Data",
+    data=csv,
+    file_name='report.csv',
+    mime='text/csv',
+)
